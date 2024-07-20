@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codificador - Decodificador</title>
+    <title> Codificador - Decodificador </title>
 
 </head>
 <body>
@@ -13,13 +13,22 @@
     </header>
 
     <main>
+
         <section class="AreaTexto">
             <div class="CajadeTexto">
                 <label for="textoaqui"></label>
                 <textarea type="texto" id="texto" class="inputPadron" placeholder="Ingrese Texto Aqui:" oninput="HabilitarBoton()" ></textarea> 
-
+            </div>
+        
+            <div class="Caja_Boton">
+                <div class="symbol">
+                    <button class="Encriptado" onclick="encriptar()">Encriptar</button>
+                    <button class="Desencriptado" onclick="desencriptar()" id="desencriptar" disabled>Desencriptar</button>
+                </div>
 
             </div>
+
+
 
         </section>
     </main>
