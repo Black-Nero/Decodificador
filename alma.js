@@ -94,3 +94,41 @@ function ajustarEstilos (){
     }
 
 }
+
+function habilitarBoton(){
+    var textoInput = document.getElementById("texto");
+    var botondesencriptar = document.getElementById("desencriptar");
+
+    if (textoInput.value.trim()!== ""){
+        botondesencriptar.removeAttribute("Disabled");
+    } else {
+        botondesencriptar.setAttribute("desabled","disabled");
+    }
+}
+function ocultarboton (){
+    var mensajeOutput = document.getElementById("mensajeOutput");
+    var botonCopiar = document.getElementById("botoncopiar");
+
+    if (mensajeOutput.innerText.trim() !== "") {
+        botonCopiar.style.display = "block"; 
+        document.querySelector("#desencriptar").removeAttribute("disabled");
+    } else {
+        botonCopiar.style.display = "none";   
+    }
+
+}
+
+function ocultarTexto(){
+    var textoInput = document.getElementById("texto");
+    var LeyendaNoTexto = document.getElementById("LeyendaNoTexto");
+    var LeyendaNoTexto2 = document.getElementById("LeyendaNoTexto2");
+
+    if (textoInput.value.trim()==""){
+        LeyendaNoTexto.style.display = "block";
+        LeyendaNoTexto2.style.display = "block";
+    } else{
+        LeyendaNoTexto.style.display = "none";
+        LeyendaNoTexto2.style.display = "none";
+    }
+    console.log("Funcion Ocultar Texto Realizada");
+}
