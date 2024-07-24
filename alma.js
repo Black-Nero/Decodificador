@@ -10,7 +10,7 @@ function ajustarEstilos (){
     var encriptar = document.querySelector(".encriptar");
     var desencriptar = document.querySelector(".desencriptar");
 
-    if (window.innerWidth <=768 & window.innerHeight <= 1174 & textoInput.ariaValueMax.trim()!= ''){
+    if (window.innerWidth <=768 & window.innerHeight <= 1174 & textoInput.ariaValueMax.trim()!= " "){
        
         imagenNoTexto.style.display = "none";
         textoInput.style.maxHeight = "35%";
@@ -31,10 +31,10 @@ function ajustarEstilos (){
         botonCopiar.style.width = '93%';
     
         
-        console.log('ajustar estilo activado');
+        console.log("ajustar estilo activado");
     }
 
-    if (window.innerWidth <= 768 & window.innerHeight <= 1384 & textoInput.value.trim()!= '') {
+    if (window.innerWidth <= 768 & window.innerHeight <= 1384 & textoInput.value.trim()!= " ") {
         
         imagenNoTexto.style.display = 'none';
 
@@ -99,17 +99,17 @@ function habilitarBoton(){
     var textoInput = document.getElementById("texto");
     var botondesencriptar = document.getElementById("desencriptar");
 
-    if (textoInput.value.trim()!== ""){
+    if (textoInput.value.trim()!== " "){
         botondesencriptar.removeAttribute("Disabled");
     } else {
         botondesencriptar.setAttribute("desabled","disabled");
     }
 }
-function ocultarboton (){
+function ocultarBoton (){
     var mensajeOutput = document.getElementById("mensajeOutput");
     var botonCopiar = document.getElementById("botoncopiar");
 
-    if (mensajeOutput.innerText.trim() !== "") {
+    if (mensajeOutput.innerText.trim() !== " ") {
         botonCopiar.style.display = "block"; 
         document.querySelector("#desencriptar").removeAttribute("disabled");
     } else {
@@ -130,5 +130,95 @@ function ocultarTexto(){
         LeyendaNoTexto.style.display = "none";
         LeyendaNoTexto2.style.display = "none";
     }
-    console.log("Funcion Ocultar Texto Realizada");
+    console.log("Función Ocultar Texto Realizada");
 }
+
+function ocultarImagen() {
+    var textoInput = document.getElementById("texto");
+    var imagenNoTexto = document.getElementById("imagenNoTexto");
+
+    if (textoInput.value.trim() === "") {
+        imagenNoTexto.style.display = "block";
+    } else {
+        imagenNoTexto.style.display = "none";
+    }
+    console.log("Función ocultar Imagen Realizada");
+}
+
+function eventos(){
+    ocultarBoton();
+    ocultarImagen();
+    ocultarTexto();
+    ajustarEstilos();
+}
+
+function encriptar() {
+    var textoInput = document.getElementById("texto").value;
+    var resultado = encriptarMensaje(textoInput);
+
+    document.getElementById("mensajeOutput").innerText = resultado.mensajeCodificado;
+    manejarEventos();
+    
+}
+function desencriptar() {
+    var textoInput = document.getElementById("texto").value;
+    var resultado = desencriptarMensaje(textoInput);
+    document.getElementById("mensajeOutput").innerText = resultado.mensajeDescodificado;
+    manejarEventos();
+}
+
+
+
+function encriptarMensaje(parrafo) {
+    let modificado = parrafo.toLowerCase().replace(/[^a-z\s]+/g, " ");
+
+    const reglasPersonalizadas = {
+        "a": "ai",
+        "e": "enter",
+        "i": "imes",
+        "o": "ober",
+        "u": "ufat",
+    };
+
+    modificado = modificado.replace(/[aeiou]/g, caracter => reglasPersonalizadas[caracter] || caracter);
+
+    return { mensajeOriginal: parrafo, mensajeCodificado: modificado };
+}
+
+
+function desencriptarMensaje(parrafoCodificado) {
+    let modificado = parrafoCodificado.toLowerCase().replace(/[^a-z\s]+/g, " ");
+
+    const reglasPersonalizadas = {
+        "ai": "a",
+        "enter": "e",
+        "imes": "i",
+        "ober": "o",
+        "ufat": "u"
+    };
+
+    for (const secuencia in reglasPersonalizadas) {
+        if (modificado.includes(secuencia)) {
+            modificado = modificado.replace(new RegExp(secuencia, "g"), reglasPersonalizadas[secuencia]);
+        }
+    }
+
+    return { mensajeDescodificado: modificado, mensajeCodificado: parrafoCodificado };
+}
+function copiarMensaje() {
+        
+        var elemento = document.getElementById("mensajeOutput");
+    
+        var rango = document.createRange();
+        rango.selectNode(elemento);
+        window.getSelection().removeAllRanges(); 
+        window.getSelection().addRange(rango);
+    
+        try {
+            document.execCommand("Copy");
+            console.log("Texto copiado exitosamente");
+        } catch (err) {
+            console.error("Error al intentar copiar el texto", err);
+        }
+        window.getSelection().removeAllRanges();
+    }
