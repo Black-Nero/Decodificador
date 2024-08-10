@@ -8,8 +8,8 @@ const informacion =document.getElementById("informacion");
 const LadoDerecha = document.getElementById("derecha");
 
 const remplace = (newvalue) => {
-    textFinal.innerHTML = nervalue;
-    textFinal.classList.add("ajustar");
+    texto2.innerHTML = newvalue;
+    texto2.classList.add("ajustar");
     rigth.classList.add("ajuste");
     inputTextArea.value = " ";
     inputTextArea.style.height = "auto";
@@ -37,7 +37,7 @@ let remplazar =[
     ["u", "ufat"],
 ];
 
-encriptar.addEventListener('click', () => {
+encriptar.addEventListener("click", () => {
 
 	const texto = inputTextArea.value.toLowerCase();
 
@@ -57,7 +57,7 @@ encriptar.addEventListener('click', () => {
 	};
 });
 
-desencriptar.addEventListener('click', () => {
+desencriptar.addEventListener("click", () => {
 
 	const texto = inputTextArea.value.toLowerCase();
 
@@ -77,10 +77,10 @@ desencriptar.addEventListener('click', () => {
 	};
 });
 
-copy.addEventListener("click", () => {
+copiar.addEventListener("click", () => {
 	let texto = texto2;
 	texto.select();
-	document.execCommand('copy');
+	document.execCommand("copy");
 	alert("Texto Copiado");
 	reset();
 });
