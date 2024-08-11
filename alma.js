@@ -10,8 +10,8 @@ const LadoDerecha = document.getElementById("derecha");
 const remplace = (newvalue) => {
     texto2.innerHTML = newvalue;
     texto2.classList.add("ajustar");
-    rigth.classList.add("ajuste");
-    inputTextArea.value = " ";
+    LadoDerecha.classList.add("ajuste");
+    inputTextArea.value = "";
     inputTextArea.style.height = "auto";
     inputTextArea.placeholder ="Ingrese texto aqui";
     persona.classList.add("ocultar");
@@ -30,57 +30,54 @@ const reset = () => {
 }
 
 let remplazar =[
+	["e", "enter"],
+	["i", "imes"],
     ["a", "ai"],
-    ["e", "enter"],
-    ["i", "imes"],
     ["o", "ober"],
     ["u", "ufat"],
+
 ];
 
 encriptar.addEventListener("click", () => {
-
-	const texto = inputTextArea.value.toLowerCase();
-
-	if (texto != "") {
+    const texto = inputTextArea.value.toLowerCase();
+	remplazar.sort((a, b) => b[0].length - a[0].length);
+    if (texto !== "")  {
+		
 		function encript(newtext) {
 			for (let i = 0; i < remplazar.length; i++) {
-				if (newtext.includes(remplazar[i][0])) {
-					newtext = newtext.replaceAll(remplazar[i][0], remplazar[i][1]);
-				};
-			};
+				newtext = newtext.split(remplazar[i][0]).join(remplazar[i][1]);
+			}
 			return newtext;
-		};
-		remplace(encript(texto));
-	} else {
-		alert("Ingrese texto para encriptar");
-		reset();
-	};
+		}
+        remplace(encript(texto));
+    } else {
+        alert("Ingrese texto para encriptar");
+        reset();
+    }
 });
 
 desencriptar.addEventListener("click", () => {
 
 	const texto = inputTextArea.value.toLowerCase();
 
-	if (texto != "") {
-		function desencript(newtext) {
-			for (let i = 0; i < remplazar.length; i++) {
-				if (newtext.includes(remplazar[i][1])) {
-					newtext = newtext.replaceAll(remplazar[i][1], remplazar[i][0]);
-				};
-			};
-			return newtext;
-		};
-		remplace(desencript(texto));
-	} else {
-		alert("Ingrese texto a desencriptar");
-		reset();
-	};
+    if (texto !== "") {
+        function encript(newtext) {
+            for (let i = 0; i < remplazar.length; i++) {
+                // Reemplaza todas las ocurrencias de la letra con su correspondiente valor encriptado
+                newtext = newtext.split(remplazar[i][1]).join(remplazar[i][0]);
+            }
+            return newtext;
+        }
+        remplace(encript(texto));
+    } else {
+        alert("Ingrese texto para desencriptar");
+        reset();
+    }
 });
-
 copiar.addEventListener("click", () => {
 	let texto = texto2;
 	texto.select();
-	document.execCommand("copy");
+	document.execCommand("Copiado");
 	alert("Texto Copiado");
 	reset();
 });
