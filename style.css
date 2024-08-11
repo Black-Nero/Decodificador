@@ -64,9 +64,10 @@ header {
 	gap: .5em;
 }
 .logo{
-	max-height: 45px;
+	max-height: 70px;
 	height: 100%;
 	min-height: 40px;
+	padding: 10px;
 }
 
 .container {
